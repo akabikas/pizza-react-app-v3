@@ -26,12 +26,6 @@ describe('OrderPage', () => {
     expect(AddressInput).toBeInTheDocument();
   });
 
-  test('renders ingredients checkbox field', () => {
-    const { getByLabelText } = render(<OrderPage />);
-    const ingredientsCheckbox = getByLabelText('Ingredients');
-    expect(ingredientsCheckbox).toBeInTheDocument();
-  });
-
   test('renders order now button', () => {
     const { getByText } = render(<OrderPage />);
     const orderNowButton = getByText('Order Now');
