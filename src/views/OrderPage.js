@@ -1,8 +1,9 @@
 import React from 'react'
+import Ingredients from '../components/Ingredients'
  
 
 export default function OrderPage() {
-  const hStyle = { color: 'white'};
+  
   return (
     <>
     <div>
@@ -11,9 +12,8 @@ export default function OrderPage() {
       you would like on your Pizza!</h2>
       
     </div>
-    
-
     <Details/>
+    <Ingredients/>
     </>
     
   )

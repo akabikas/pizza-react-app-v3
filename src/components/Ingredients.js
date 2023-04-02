@@ -15,11 +15,11 @@ export default function Ingredients() {
       };
       
       const handleChangeThree = () => {
-        setCheckedTwo(!checkedThree);
+        setCheckedThree(!checkedThree);
       };
      
       const handleChangeFour = () => {
-        setCheckedTwo(!checkedFour);
+        setCheckedFour(!checkedFour);
       };
   return (
     <div>
