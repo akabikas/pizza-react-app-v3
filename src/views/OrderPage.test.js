@@ -22,8 +22,8 @@ describe('OrderPage', () => {
 
   test('renders Address field', () => {
     const { getByLabelText } = render(<OrderPage />);
-    const firstNameInput = getByLabelText('Address');
-    expect(firstNameInput).toBeInTheDocument();
+    const AddressInput = getByLabelText('Address');
+    expect(AddressInput).toBeInTheDocument();
   });
 
   test('renders ingredients checkbox field', () => {
