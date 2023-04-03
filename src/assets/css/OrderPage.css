@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 body{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .order-page{
     padding-top: 100px;
@@ -60,8 +60,8 @@ body{
 }
 .pizza-image{
     position: absolute;
-    right: -10%;
-    bottom: -20%;
+    right: 0%;
+    bottom: 10%;
 }
 .pizza-image img{
     max-width: 200%;
