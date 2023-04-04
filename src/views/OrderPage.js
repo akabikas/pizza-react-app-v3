@@ -26,13 +26,20 @@ function Form() {
     console.log('Email:', email);
     console.log('Ingredients:', ingredients);
 
-    axios.post(`http://localhost:8080/orders`,
-     {'firstName': {firstName},
-      'lastName': {lastName},
-      'address': {address},
-      'email':{email},
-      'ingredients':{ingredients} });
-
+    axios.post(`http://localhost:8000/orders`,
+     {firstName,
+      lastName,
+      address,
+      email,
+      ingredients })
+      .catch(function (error) {
+        if (!error.response) {
+          // network error
+          this.errorStatus = 'Error: Network Error';
+      } else {
+          this.errorStatus = error.response.data.message;
+      }
+      });
   };
 
   return (

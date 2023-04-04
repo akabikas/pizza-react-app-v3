@@ -14,7 +14,7 @@ const MongoClient = require('mongodb').MongoClient
 const db = 0;
 
 //endpoint for getting all of the orders
-app.get("/", async (req, res) => {
+app.get("/orders", async (req, res) => {
 
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
     await client.connect();
@@ -23,12 +23,19 @@ app.get("/", async (req, res) => {
     const collection = db.collection('order');
     const order =  await collection.find({}).toArray();
     res.json(order);
-    });
-    
+    });  
 
+app.post("/orders", async (req, res) => {
 
-
-    
+    const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
+    await client.connect();
+    const data = req.body;
+    console.log(data);
+    const db = client.db('pizza-db');
+    const collection = db.collection('order');
+    const order =  await collection.insertOne(data);
+    res.json(`Order: ${data} received`);
+    });  
 
 //endpoint for getting one order based on the id
 app.get('/api/orders/:id', async (req, res) => {
@@ -36,10 +43,22 @@ app.get('/api/orders/:id', async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
     await client.connect();
     const db = client.db('pizza-db');
-
     const order = await db.collection('order').findOne({'id':Number(id)});
     res.json(order);
     });
+
+
+//endpoint for deleting all of the data
+app.delete('/deleteorders', async (req,res) => {
+    const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
+    await client.connect();
+    const db = client.db('pizza-db');
+    const order = await db.collection('order').deleteMany({});
+    }
+)
+
+
+
 
 //server listens on port 8000
 app.listen(port, () => console.log(`Express server listening on port ${port}!`))
