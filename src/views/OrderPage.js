@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import "../assets/css/OrderPage.css";
 import logo from '../assets/img/pizza.png';
 function Form() {
@@ -24,6 +25,14 @@ function Form() {
     console.log('Address:', address);
     console.log('Email:', email);
     console.log('Ingredients:', ingredients);
+
+    axios.post(`http://localhost:8080/orders`,
+     {'firstName': {firstName},
+      'lastName': {lastName},
+      'address': {address},
+      'email':{email},
+      'ingredients':{ingredients} });
+
   };
 
   return (
