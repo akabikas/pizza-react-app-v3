@@ -1,11 +1,11 @@
 import React from "react";
-import "./Modal.css";
+
 
 function OrderConfirmationModal() {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
-        <div className="tittleCloseBtn">
+        <div className="titleCloseBtn">
           <button> X </button>
         </div>
         <div className="title">
