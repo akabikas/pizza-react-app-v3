@@ -1,68 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
 }
-body{
-    overflow-x: hidden;
+body {
+  overflow-x: hidden;
 }
-.order-page{
-    padding-top: 100px;
-    padding-bottom: 100px;    
+.order-page {
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
-.order-page h1{
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 50px;
+.order-page h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 50px;
 }
 
-.order-page fieldset{
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-weight: 500;
-
+.order-page fieldset {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
-.order-page fieldset input{
-    width: 100%;
-    margin-top: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    outline: 0px;
+.order-page fieldset input {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  outline: 0px;
 }
-.order-page fieldset input.checkbox{
-    height: 20px;
-    width: 20px;
-    margin-top: 0;
-    margin-right: 10px;
+.order-page fieldset input.checkbox {
+  height: 20px;
+  width: 20px;
+  margin-top: 0;
+  margin-right: 10px;
 }
-.order-page fieldset label.ingredients .list{
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+.order-page fieldset label.ingredients .list {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
-.order-page fieldset label{
-    width: 100%;
+.order-page fieldset label {
+  width: 100%;
 }
-.OrderNowButton{
-    padding: 12px 60px;
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-    font-weight: 600;
+.OrderNowButton {
+  padding: 12px 60px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  font-weight: 600;
 }
-.OrderNowButton:hover{
-    border: 0px;
-    background-color: black;
-    color: white;
+.OrderNowButton:hover {
+  border: 0px;
+  background-color: black;
+  color: white;
 }
-.pizza-image{
-    position: absolute;
-    right: 0%;
-    bottom: 10%;
+.pizza-image {
+  position: absolute;
+  right: 0%;
+  bottom: 10%;
 }
-.pizza-image img{
-    max-width: 200%;
+.pizza-image img {
+  max-width: 200%;
 }
