@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "../assets/css/OrderPage.css";
 import logo from '../assets/img/pizza.png';
+import OrderConfirmationModal from "../components/Modal";
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -9,6 +10,13 @@ function Form() {
   const [email, setEmail] = useState('');
   const [ingredients, setIngredients] = useState([]);
 
+  const [isSubmitted, setSubmitStatus] = useState(false);
+
+
+  const handleClose = () => {
+    setSubmitStatus(false);
+
+  }
   const handleCheckboxChange = event => {
     const { value } = event.target;
     if (ingredients.includes(value)) {
@@ -20,11 +28,6 @@ function Form() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Address:', address);
-    console.log('Email:', email);
-    console.log('Ingredients:', ingredients);
 
     axios.post(`http://localhost:8000/orders`,
      {firstName,
@@ -40,10 +43,13 @@ function Form() {
           this.errorStatus = error.response.data.message;
       }
       });
+
+      setSubmitStatus(true)
   };
 
   return (
     <>
+    {isSubmitted && <OrderConfirmationModal onClickOption={handleClose}/> }
       <div className='container order-page'>
         <h1>Order Page</h1>
         <div className='order-form col-6'>
