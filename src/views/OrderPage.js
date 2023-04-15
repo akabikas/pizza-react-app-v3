@@ -3,6 +3,9 @@ import axios from 'axios';
 import "../assets/css/OrderPage.css";
 import logo from '../assets/img/pizza.png';
 import OrderConfirmationModal from "../components/Modal";
+
+import emailjs from 'emailjs-com';
+emailjs.init('NnQS5BEsBSDf-T5Q6');
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -11,6 +14,24 @@ function Form() {
   const [ingredients, setIngredients] = useState([]);
 
   const [isSubmitted, setSubmitStatus] = useState(false);
+
+
+
+  // send email function and parameter setup for emailJS
+  function sendEmail(email_to, first_name, last_name) {
+    const templateParams = {
+      to_email: email_to,
+      first_name: first_name,
+      last_name: last_name
+    };
+
+    emailjs.send('service_rvvtirp', 'template_4ytpafc', templateParams)
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+      }, (error) => {
+        console.error('Email failed to send:', error);
+      });
+  }
 
 
   const handleClose = () => {
@@ -28,28 +49,31 @@ function Form() {
 
   const handleSubmit = event => {
     event.preventDefault();
-
+    sendEmail(email, firstName, lastName);
     axios.post(`http://localhost:8000/orders`,
-     {firstName,
-      lastName,
-      address,
-      email,
-      ingredients })
+      {
+        firstName,
+        lastName,
+        address,
+        email,
+        ingredients
+      })
       .catch(function (error) {
         if (!error.response) {
           // network error
           this.errorStatus = 'Error: Network Error';
-      } else {
+        } else {
           this.errorStatus = error.response.data.message;
-      }
+        }
       });
 
-      setSubmitStatus(true)
+
+    setSubmitStatus(true)
   };
 
   return (
     <>
-    {isSubmitted && <OrderConfirmationModal onClickOption={handleClose}/> }
+      {isSubmitted && <OrderConfirmationModal onClickOption={handleClose} />}
       <div className='container order-page'>
         <h1>Order Page</h1>
         <div className='order-form col-6'>
