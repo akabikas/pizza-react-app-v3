@@ -11,7 +11,7 @@ const Favouritestabs = ({ name, price }) => {
     <div>
       <h3>{name}</h3>
       <p>{price}</p>
-      <button onClick={toggleFavorite}>
+      <button onClick={toggleFavorite} className='OrderNowButton'>
         {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
       </button>
     </div>

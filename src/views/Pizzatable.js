@@ -20,7 +20,7 @@ const PizzaTable = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h2>Pizza Menu</h2>
       <table>
         <thead>
@@ -36,7 +36,7 @@ const PizzaTable = () => {
               <td>{pizza.name}</td>
               <td>${pizza.price}</td>
               <td>
-                <button onClick={() => handleSelectPizza(pizza)}>Order</button>
+                <button className='OrderNowButton' onClick={() => handleSelectPizza(pizza)}>Order</button>
               </td>
             </tr>
           ))}
@@ -46,7 +46,7 @@ const PizzaTable = () => {
         <div>
           <h3>Selected Pizza: {selectedPizza.name}</h3>
           <p>Price: ${selectedPizza.price}</p>
-          <button onClick={handleQuickOrder}>Quick Order</button>
+          <button className='OrderNowButton' onClick={handleQuickOrder}>Quick Order</button>
         </div>
       )}
     </div>

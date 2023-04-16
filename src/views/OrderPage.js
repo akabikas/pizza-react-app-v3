@@ -4,7 +4,9 @@ import "../assets/css/OrderPage.css";
 import logo from '../assets/img/pizza.png';
 import OrderConfirmationModal from "../components/Modal";
 
+
 import emailjs from 'emailjs-com';
+import Favouritestabs from './FavouritesTab';
 emailjs.init('NnQS5BEsBSDf-T5Q6');
 function Form() {
   const [firstName, setFirstName] = useState('');
@@ -127,7 +129,9 @@ function Form() {
             </fieldset>
             <br />
             <button type="submit" className='OrderNowButton'>Order Now</button>
+            
           </form>
+          <Favouritestabs />
         </div>
         <div className='pizza-image col-6'>
           <img src={logo} ></img>
