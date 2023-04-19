@@ -25,6 +25,7 @@ app.get("/orders", async (req, res) => {
     res.json(order);
     });  
 
+//endpoint for inserting one order in the database
 app.post("/orders", async (req, res) => {
 
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
@@ -47,15 +48,29 @@ app.get('/api/orders/:id', async (req, res) => {
     res.json(order);
     });
 
+//endpoint for inserting one order in the favourites collection
+app.post("/favourites", async (req, res) => {
 
-//endpoint for deleting all of the data
-app.delete('/deleteorders', async (req,res) => {
+    const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
+    await client.connect();
+    const data = req.body;
+    console.log(data);
+    const db = client.db('pizza-db');
+    const collection = db.collection('favourites');
+    const order =  await collection.insertOne(data);
+    res.json(`Favourite order: ${data} received`);
+    });  
+
+//endpoint for getting all favourite orders
+app.get('/api/favourites/:id', async (req, res) => {
+    const id = req.params.id;
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
     await client.connect();
     const db = client.db('pizza-db');
-    const order = await db.collection('order').deleteMany({});
-    }
-)
+    const collection = db.collection('favourites')
+    const order = await collection.find({}).toArray();
+    res.json(order);
+    });
 
 
 
