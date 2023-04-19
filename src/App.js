@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import OrderPage from "./views/OrderPage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PizzaTable from "./views/Pizzatable";
 
 function App() {
   return (
@@ -9,9 +10,10 @@ function App() {
       <Router>
             <Routes>
               <Route end path="/" element={<OrderPage />} />
-              <Route path="/favorites" element={"favorites page to be created"} />
+              <Route path="/favorites" element={ <PizzaTable />} />
           </Routes>
       </Router>
+    
     </>
   );
 }
