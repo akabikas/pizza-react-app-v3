@@ -1,23 +1,13 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const PizzaTable = () => {
-  
-  const [pizzas, setPizzas] = useState([]);
-
-  useEffect(() =>{
-    axios.get('http://localhost:8000/favourites')
-    .then(function(response) {
-      console.log(response.data);
-      setPizzas(response.data)
-   }).catch(function(error) {
-      console.log(error.response.data);
-   });
-    }, [])
-  
 
   
-  
+  const [pizzas, setPizzas] = useState([
+    { name: 'Pepperoni', price: 10 },
+    { name: 'Margherita', price: 8 },
+    { name: 'Vegetarian', price: 9 },
+  ]);
 
   const [selectedPizza, setSelectedPizza] = useState(null);
 
@@ -31,27 +21,20 @@ const PizzaTable = () => {
 
   return (
     <div className='container'>
-      <h2>Favourites</h2>
+      <h2>Pizza Menu</h2>
       <table>
         <thead>
           <tr>
-            <th>Toppings</th>
+            <th>Name</th>
             <th>Price</th>
-            <th></th>
+            <th>Quick Order</th>
           </tr>
         </thead>
         <tbody>
-          {pizzas.map((pizza) => (
-            <tr>
-              <td>{pizza.ingredients.map ((ingredient) => (
-                  <tr>
-                    <td>
-                      {ingredient}
-                    </td>
-                  </tr>
-              ))}
-              </td>
-              <td>$10</td>
+          {pizzas.map((pizza, index) => (
+            <tr key={index}>
+              <td>{pizza.name}</td>
+              <td>${pizza.price}</td>
               <td>
                 <button className='OrderNowButton' onClick={() => handleSelectPizza(pizza)}>Order</button>
               </td>

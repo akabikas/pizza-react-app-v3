@@ -1,8 +1,8 @@
 import "./App.css";
 import React from "react";
-import OrderPage from "./views/OrderPage.js";
+import OrderPage from "./views/OrderPage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PizzaTable from "./views/Pizzatable.js";
+import PizzaTable from "./views/Pizzatable";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Router>
             <Routes>
               <Route end path="/" element={<OrderPage />} />
-              <Route exact path="/favorites" element={ <PizzaTable />} />
+              <Route path="/favorites" element={ <PizzaTable />} />
           </Routes>
       </Router>
     

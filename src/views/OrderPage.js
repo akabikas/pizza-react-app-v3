@@ -4,6 +4,7 @@ import "../assets/css/OrderPage.css";
 import logo from '../assets/img/pizza.png';
 import OrderConfirmationModal from "../components/Modal";
 
+
 import emailjs from 'emailjs-com';
 import Favouritestabs from './FavouritesTab';
 emailjs.init('NnQS5BEsBSDf-T5Q6');
@@ -59,33 +60,17 @@ function Form() {
         email,
         ingredients
       })
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
-        console.log(error);
+        if (!error.response) {
+          // network error
+          this.errorStatus = 'Error: Network Error';
+        } else {
+          this.errorStatus = error.response.data.message;
+        }
       });
 
 
     setSubmitStatus(true)
-  };
-
-  const addFavourite = () => {
-    axios.post(`http://localhost:8000/favourites`,
-      {
-        firstName,
-        lastName,
-        address,
-        email,
-        ingredients
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
   };
 
   return (
@@ -144,11 +129,12 @@ function Form() {
             </fieldset>
             <br />
             <button type="submit" className='OrderNowButton'>Order Now</button>
-            </form>
-          <button onClick={addFavourite} className='OrderNowButton'>Add to favourites</button>
+            
+          </form>
+          <Favouritestabs />
         </div>
         <div className='pizza-image col-6'>
-          <img src={logo} alt='Pizza image'></img>
+          <img src={logo} ></img>
         </div>
       </div>
     </>

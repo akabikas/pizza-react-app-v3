@@ -1,11 +1,9 @@
 //imports
-
-const nodeExternals = require('webpack-node-externals');
-
 const express = require('express');
 const app = express();
 const port = 8000;
 const cors = require('cors');
+// const { MongoClient } = require('mongodb');
 
 //created the server using express
 app.use(cors());
@@ -64,14 +62,14 @@ app.post("/favourites", async (req, res) => {
     });  
 
 //endpoint for getting all favourite orders
-app.get('/favourites', async (req, res) => {
+app.get('/api/favourites/:id', async (req, res) => {
     const id = req.params.id;
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
     await client.connect();
     const db = client.db('pizza-db');
     const collection = db.collection('favourites')
-    const orders = await collection.find({}).toArray();
-    res.json(orders);
+    const order = await collection.find({}).toArray();
+    res.json(order);
     });
 
 
@@ -79,9 +77,3 @@ app.get('/favourites', async (req, res) => {
 
 //server listens on port 8000
 app.listen(port, () => console.log(`Express server listening on port ${port}!`))
-
-
-module.exports = {
-    target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
-};
