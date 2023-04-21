@@ -1,0 +1,51 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    color: black;
+    padding: 20px;
+}
+
+.nav-left {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-brand {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    padding-right: 20px;
+
+}
+
+.nav-link :last-child {
+    padding-right: 0;
+}
+.registerBtn{
+    padding: 12px 30px;
+    border: 1px solid black;
+    background-color: Black;
+    color: white;
+    font-weight: 600;
+}
+.registerBtn:hover{
+    padding: 12px 30px;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    font-weight: 600;
+}

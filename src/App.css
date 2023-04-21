@@ -5,5 +5,22 @@
   margin: 0;
 }
 
+.homepage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+.homepage h1{
+  max-width: 50%;
+  text-align: center;
+  font-size: 70px;
+}
+
+.homepage h1 span{
+ font-weight: 900;
+}
+@import "./assets/css/Header.css";
 @import "./assets/css/OrderPage.css";
 @import "./assets/css/Modal.css";
