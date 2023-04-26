@@ -6,6 +6,7 @@ import PizzaTable from "./views/Pizzatable";
 import Header from "./components/Header";
 import HomePage from "./views/HomePage";
 import Login from "./views/Login";
+import Dashboard from "./views/Dashboard";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route end path="/order" element={<OrderPage />} />
           <Route path="/favorites" element={<PizzaTable />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+
 
         </Routes>
       </Router>
