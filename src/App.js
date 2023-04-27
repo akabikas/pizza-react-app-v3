@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import HomePage from "./views/HomePage";
 import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
