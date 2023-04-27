@@ -1,0 +1,46 @@
+.register-screen{
+    margin-top: 30px;
+}
+.register-screen .row{
+    border-radius: 6px;
+}
+.register-screen .pizza-img img{
+
+        max-width: 100%;
+    
+}
+.register-screen .card{
+    border-radius: 0px;
+    border: 0px;
+    margin-top: 30px;
+background: transparent;
+
+
+}
+
+.register-screen input{
+    border-radius: 0px;
+    font-size: 14px;
+    background: transparent;
+    outline: 0;
+}
+.register-screen input:focus{
+    background: transparent;
+    outline: 0;
+    border: 0;
+}
+
+
+.register-screen .register-button{
+    padding: 12px 60px;
+    border: 1px solid black;
+    background: transparent;
+    color: black;
+    font-weight: 600;
+  }
+  
+  .register-screen .register-button:hover{
+    border: 0px;
+    background-color: black;
+    color: white;
+  }
