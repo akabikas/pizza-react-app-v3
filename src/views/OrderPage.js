@@ -6,17 +6,19 @@ import OrderConfirmationModal from "../components/Modal";
 
 
 import emailjs from 'emailjs-com';
-import Favouritestabs from './FavouritesTab';
 emailjs.init('NnQS5BEsBSDf-T5Q6');
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [crust, setCrust] = useState("")
+  const [time, setTime] = useState('');
+
 
   const [isSubmitted, setSubmitStatus] = useState(false);
-
 
 
   // send email function and parameter setup for emailJS
@@ -40,6 +42,12 @@ function Form() {
     setSubmitStatus(false);
 
   }
+
+  const handleRadioboxChange = event => {
+    const { value } = event.target;
+    setCrust(value);
+  };
+
   const handleCheckboxChange = event => {
     const { value } = event.target;
     if (ingredients.includes(value)) {
@@ -50,6 +58,8 @@ function Form() {
   };
 
   const handleSubmit = event => {
+  
+    setTime(Date().toLocaleString())
     event.preventDefault();
     sendEmail(email, firstName, lastName);
     axios.post(`http://localhost:8000/orders`,
@@ -58,7 +68,10 @@ function Form() {
         lastName,
         address,
         email,
-        ingredients
+        phone,
+        ingredients,
+        crust,
+        time
       })
       .catch(function (error) {
         if (!error.response) {
@@ -73,11 +86,32 @@ function Form() {
     setSubmitStatus(true)
   };
 
+  //adding a favourite order
+  const addFavourite = () => {
+    axios.post(`http://localhost:8000/favourites`,
+      {
+        firstName,
+        lastName,
+        address,
+        email,
+        phone,
+        ingredients,
+        crust
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  };
+
   return (
     <>
       {isSubmitted && <OrderConfirmationModal onClickOption={handleClose} />}
       <div className='container order-page'>
-        <h1>Order Page</h1>
+        <h1>Quick Order</h1>
         <div className='order-form col-6'>
 
 
@@ -107,15 +141,40 @@ function Form() {
               </label>
             </fieldset>
             <fieldset>
+              <label>
+                Phone number
+                <input type="text" value={phone} onChange={e => setPhone(e.target.value)} />
+              </label>
+            </fieldset>
+            <fieldset>
+              <label className='ingredients'>
+                Crust
+                
+                <div className='list'>
+                <input className='checkbox' type="radio" value="Classic" checked={crust.includes('Classic')} onChange={handleRadioboxChange} />
+                Classic</div>
+                
+                <div className='list'><input className='checkbox' type="radio" value="Stuffed" checked={crust.includes('Stuffed')} onChange={handleRadioboxChange} />
+                  Stuffed</div>
+               
+                <div className='list'><input className='checkbox' type="radio" value="Pan" checked={crust.includes('Pan')} onChange={handleRadioboxChange} />
+                  Pan</div>
+              </label>
+            </fieldset>
+            <fieldset>
               <label className='ingredients'>
                 Ingredients
                 <div className='list'>
-                  <input className='checkbox' type="checkbox" value="Cheese" checked={ingredients.includes('Cheese')} onChange={handleCheckboxChange} />
-                  <span>Cheese</span>
+                  <input className='checkbox' type="checkbox" value="Mozzarela" checked={ingredients.includes('Mozzarela')} onChange={handleCheckboxChange} />
+                  <span>Mozzarela</span>
                 </div>
                 <div className='list'>
                   <input className='checkbox' type="checkbox" value="Tomatoes" checked={ingredients.includes('Tomatoes')} onChange={handleCheckboxChange} />
                   <span>Tomatoes</span>
+                </div>
+                <div className='list'>
+                  <input className='checkbox' type="checkbox" value="Peperoni" checked={ingredients.includes('Peperoni')} onChange={handleCheckboxChange} />
+                  <span>Peperoni</span>
                 </div>
                 <div className='list'>
                   <input className='checkbox' type="checkbox" value="Peppers" checked={ingredients.includes('Peppers')} onChange={handleCheckboxChange} />
@@ -131,7 +190,7 @@ function Form() {
             <button type="submit" className='OrderNowButton'>Order Now</button>
             
           </form>
-          <Favouritestabs />
+          <button onClick={addFavourite} className='OrderNowButton'>Add to favourites</button>
         </div>
         <div className='pizza-image col-6'>
           <img src={logo} ></img>

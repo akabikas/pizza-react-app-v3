@@ -7,7 +7,12 @@ import Header from "./components/Header";
 import HomePage from "./views/HomePage";
 import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
+<<<<<<< HEAD
 import Sidebar from "./components/Sidebar";
+=======
+import Favourites from "./views/Favourites";
+import PastOrders from "./views/PastOrders";
+>>>>>>> b48bdb4 (added past orders page, improved the favourite orders page)
 
 function App() {
   return (
@@ -17,7 +22,8 @@ function App() {
         <Routes>
           <Route end path="/" element={<HomePage />} />
           <Route end path="/order" element={<OrderPage />} />
-          <Route path="/favorites" element={<PizzaTable />} />
+          <Route end path="/past-orders" element={<PastOrders />} />
+          <Route path="/favorites" element={<Favourites />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
 

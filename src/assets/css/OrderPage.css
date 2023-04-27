@@ -16,6 +16,12 @@ body {
   margin-bottom: 50px;
 }
 
+.orderTable{
+  width: 100%;
+  align-items: center;  
+  padding-bottom: 530px;
+}
+
 .order-page fieldset {
   display: flex;
   align-items: center;

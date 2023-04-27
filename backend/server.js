@@ -34,8 +34,16 @@ app.post("/orders", async (req, res) => {
     console.log(data);
     const db = client.db('pizza-db');
     const collection = db.collection('order');
-    const order =  await collection.insertOne(data);
-    res.json(`Order: ${data} received`);
+
+    const id = await collection.countDocuments();
+    const idData = {
+        ...{"id":id+1},
+        ...data
+    }
+    
+    console.log(idData)
+    await collection.insertOne(idData);
+    res.json(`Order: ${idData} received`);
     });  
 
 //endpoint for getting one order based on the id
@@ -57,19 +65,27 @@ app.post("/favourites", async (req, res) => {
     console.log(data);
     const db = client.db('pizza-db');
     const collection = db.collection('favourites');
-    const order =  await collection.insertOne(data);
-    res.json(`Favourite order: ${data} received`);
+
+    const id = await collection.countDocuments();
+    const idData = {
+        ...{"id":id+1},
+        ...data
+    }
+    
+    console.log(idData)
+    await collection.insertOne(idData);
+    res.json(`Favourite order: ${idData} received`);
     });  
 
 //endpoint for getting all favourite orders
-app.get('/api/favourites/:id', async (req, res) => {
+app.get('/favourites', async (req, res) => {
     const id = req.params.id;
     const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
     await client.connect();
     const db = client.db('pizza-db');
     const collection = db.collection('favourites')
-    const order = await collection.find({}).toArray();
-    res.json(order);
+    const orders = await collection.find({}).toArray();
+    res.json(orders);
     });
 
 

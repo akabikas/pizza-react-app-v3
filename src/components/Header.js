@@ -7,6 +7,7 @@ function Header() {
         <a href="/" className="nav-brand">PIZZA</a>
       </div>
       <div className="nav-right">
+        <a href="/past-orders" className="nav-link">Past orders</a>
         <a href="/favorites" className="nav-link">Favorites</a>
         <a href="/order" className="nav-link">Order Now</a>
         <a href="/login" className="nav-link registerBtn">Login/Register</a>

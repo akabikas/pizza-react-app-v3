@@ -1,42 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PizzaTable = () => {
-
-  
-  const [pizzas, setPizzas] = useState([
-    { name: 'Pepperoni', price: 10 },
-    { name: 'Margherita', price: 8 },
-    { name: 'Vegetarian', price: 9 },
-  ]);
+const PizzaTable = (props) => {
 
   const [selectedPizza, setSelectedPizza] = useState(null);
+  console.log(props)
 
-  const handleSelectPizza = (pizza) => {
-    setSelectedPizza(pizza);
+  const handleSelectPizza = (props) => {
+    setSelectedPizza(props);
   };
 
   const handleQuickOrder = () => {
-    alert(`You have ordered a ${selectedPizza.name} pizza for $${selectedPizza.price}.`);
+    alert(`You have ordered a ${selectedPizza.id} pizza for $${selectedPizza.price}.`);
   };
 
   return (
     <div className='container'>
-      <h2>Pizza Menu</h2>
-      <table>
+      <h2 style={{marginTop: '50px'}}>{props.title}</h2>
+      <table className='orderTable'>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Order</th>
+            <th>Crust type</th>
+            <th>Toppings</th>
             <th>Price</th>
-            <th>Quick Order</th>
+            <th>Date and Time</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {pizzas.map((pizza, index) => (
+         
+        {props.pizzas.map((pizza, index) => (
             <tr key={index}>
-              <td>{pizza.name}</td>
-              <td>${pizza.price}</td>
+               <td>Order #
+                  {pizza.id}
+              </td>
+              <td>{pizza.crust}</td>
+              <td >{pizza.ingredients.map ((ingredient) => (
+                  <tr>
+                    <td>
+                      {ingredient}
+                    </td>
+                  </tr>
+                ))}
+              </td>
+              <td>$10</td>
               <td>
-                <button className='OrderNowButton' onClick={() => handleSelectPizza(pizza)}>Order</button>
+                {pizza.time}
+              </td>
+              <td>
+                <button className='OrderNowButton' value={pizza} onClick={() => handleSelectPizza(pizza)}>Order</button>
               </td>
             </tr>
           ))}
@@ -44,7 +56,8 @@ const PizzaTable = () => {
       </table>
       {selectedPizza && (
         <div>
-          <h3>Selected Pizza: {selectedPizza.name}</h3>
+          <h2></h2>
+          <h3>Selected Pizza: {selectedPizza.id}</h3>
           <p>Price: ${selectedPizza.price}</p>
           <button className='OrderNowButton' onClick={handleQuickOrder}>Quick Order</button>
         </div>
