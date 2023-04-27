@@ -8,32 +8,19 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export const Sidebardata = [
   {
-    title: "Home",
+    title: "Dashboard",
     icon: <HomeIcon />,
-    link: "/homepage",
+    link: "/dashboard",
   },
-
   {
-    title: "Login",
-    icon: <LoginIcon />,
-    link: "/Login",
-  },
-
-  {
-    title: "Register",
-    icon: <AppRegistrationIcon />,
-    link: "/Login",
-  },
-
-  {
-    title: "Order",
+    title: "Past Order",
     icon: <ShoppingCartIcon />,
-    link: "/OrderPage",
+    link: "/past-orders",
   },
 
   {
     title: "Favourites",
     icon: <FavoriteIcon />,
-    link: "/Favouritestabs",
+    link: "/favorites",
   },
 ];
