@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = 8000;
 const cors = require('cors');
-// const { MongoClient } = require('mongodb');
+const { async } = require('q');
 
 //created the server using express
 app.use(cors());
@@ -88,7 +88,34 @@ app.get('/favourites', async (req, res) => {
     res.json(orders);
     });
 
+app.get('/users', async (req, res) => {
+        const id = req.params.id;
+        const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
+        await client.connect();
+        const db = client.db('pizza-db');
+        const collection = db.collection('users')
+        const orders = await collection.find({}).toArray();
+        res.json(orders);
+    });
 
+app.post('/users', async (req, res) => {
+    const client = new MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0');
+    await client.connect();
+    const data = req.body;
+    console.log(data);
+    const db = client.db('pizza-db');
+    const collection = db.collection('users');
+
+    const id = await collection.countDocuments();
+    const idData = {
+        ...{"id":id+1},
+        ...data
+    }
+    
+    console.log(idData)
+    await collection.insertOne(idData);
+    res.json(`User ${idData} added`);
+});  
 
 
 //server listens on port 8000
